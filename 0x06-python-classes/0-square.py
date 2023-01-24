@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""empty class squre that defines a squaure"""
+"""a square has 4 equal sides"""
 
 
 class Square:
-    """empty class Square that defines a square"""
+    """a square has 4  equal sides"""
     pass
