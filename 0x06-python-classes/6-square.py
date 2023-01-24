@@ -60,3 +60,10 @@ class Square:
             for j in range(0, self.__size):
                 print("#", end="")
             print("")
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+
