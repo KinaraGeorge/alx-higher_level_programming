@@ -1,7 +1,11 @@
 #!/usr/bin/python3
+"""Function that inherits"""
 
 
 def inherits_from(obj, a_class):
-    if type(obj) == a_class:
+    """Function that inherits"""
+
+    if type(obj) is a_class or not isinstance(obj, a_class):
         return False
-    return isinstance(obj, a_class)
+    else:
+        return isinstance(obj, a_class)
