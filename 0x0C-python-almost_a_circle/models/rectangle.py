@@ -1,151 +1,140 @@
 #!/usr/bin/python3
-"""Class that creates the Rectangle File"""
+""" rectangle module """
+
 from models.base import Base
 
 
 class Rectangle(Base):
-    """Build a Rectangle"""
+    """ class Rectangle inherits from Base """
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Rectangle Class constructor"""
-        # Call the super class with id
+        """ initializer """
         super().__init__(id)
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
-        # Width:
-        if type(width) is not int:
-            raise TypeError("width must be an integer")
-        elif width <= 0:
-            raise ValueError("width must be > 0")
-        else:
-            self.__width = width
+    def typeChecker(self, name, value):
+        """ integer validation check """
+        if type(value) is not int:
+            raise TypeError("{} must be an integer".format(name))
 
-        # Height:
-        if type(height) is not int:
-            raise TypeError("height must be an integer")
-        elif height <= 0:
-            raise ValueError("height must be > 0")
-        else:
-            self.__height = height
-        # X:
-        if type(x) is not int:
-            raise TypeError("x must be an integer")
-        elif x < 0:
-            raise ValueError("x must be >= 0")
-        else:
-            self.__x = x
-        # Y:
-        if type(y) is not int:
-            raise TypeError("y must be an integer")
-        elif y < 0:
-            raise ValueError("y must be >= 0")
-        else:
-            self.__y = y
+    def valueWHChecker(self, name, value):
+        """ width and height validation check """
+        if value <= 0:
+            raise ValueError("{} must be > 0".format(name))
 
-    # Return and Checks the width
+    def valueXYChecker(self, name, value):
+        """ x and y validation check """
+        if value < 0:
+            raise ValueError("{} must be >= 0".format(name))
+
     @property
     def width(self):
-        """Return the width"""
+        """ getter width """
         return self.__width
 
     @width.setter
-    def width(self, width):
-        """Checks the width"""
-        if type(width) is not int:
-            raise TypeError("width must be an integer")
-        elif width <= 0:
-            raise ValueError("width must be > 0")
-        else:
-            self.__width = width
+    def width(self, value):
+        """ width setter, gets validated """
+        self.typeChecker("width", value)
+        self.valueWHChecker("width", value)
+        self.__width = value
 
-    # Return and Checks the height
     @property
     def height(self):
-        """Return the height"""
+        """ getter height """
         return self.__height
 
     @height.setter
-    def height(self, height):
-        """Checks the height"""
-        if type(height) is not int:
-            raise TypeError("height must be an integer")
-        elif height <= 0:
-            raise ValueError("height must be > 0")
-        else:
-            self.__height = height
+    def height(self, value):
+        """ height setter, gets validated """
+        self.typeChecker("height", value)
+        self.valueWHChecker("height", value)
+        self.__height = value
 
-    # Return and Checks the x
     @property
     def x(self):
-        """Return the x"""
+        """ getter for x """
         return self.__x
 
     @x.setter
-    def x(self, x):
-        """Checks the x"""
-        if type(x) is not int:
-            raise TypeError("x must be an integer")
-        elif x < 0:
-            raise ValueError("x must be >= 0")
-        else:
-            self.__x = x
+    def x(self, value):
+        """ X setter, gets validated """
+        self.typeChecker("x", value)
+        self.valueXYChecker("x", value)
+        self.__x = value
 
-    # Return and Checks the y
     @property
     def y(self):
-        """Return the y"""
+        """ getter for y """
         return self.__y
 
     @y.setter
-    def y(self, y):
-        """Checks the y"""
-        if type(y) is not int:
-            raise TypeError("y must be an integer")
-        elif y < 0:
-            raise ValueError("y must be >= 0")
-        else:
-            self.__y = y
+    def y(self, value):
+        """ Y setter, gets validated """
+        self.typeChecker("y", value)
+        self.valueXYChecker("y", value)
+        self.__y = value
 
     def area(self):
-        """Calculates shape area"""
-        return self.__width * self.__height
+        """ calcualtes the area """
+        return self.width * self.height
 
     def display(self):
-        """Print the shape with character '#'"""
-        for a in range(0, self.__y):
-            print("")
-        for i in range(0, self.__height):
-            for b in range(0, self.__x):
-                print(" ", end="")
-            for j in range(0, self.__width):
-                print("#", end="")
-            print("")
+        """ shows a display of #s """
+        for i in range(self.y):
+            print()
+        for i in range(self.height):
+            for x in range(self.width + self.x):
+                if x >= self.x:
+                    print('#', end='')
+                else:
+                    print(' ', end='')
+            print()
 
     def __str__(self):
-        """Override str function to return message"""
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id,
-                                                       self.__x,
-                                                       self.__y,
-                                                       self.__width,
-                                                       self.__height)
+        """ overwrites the str """
+        return("[{}] ({}) {}/{} - {}/{}".format(
+            str(self.__class__.__name__), self.id, self.x,
+            self.y, self.width, self.height))
 
     def update(self, *args, **kwargs):
-        """That assigns an argument to each attribute"""
-        names = ["id", "width", "height", "x", "y"]
-        if args and len(args) != 0:
-            for i in range(len(args)):
-                setattr(self, names[i], args[i])
+        """ the update function """
+        if args is not None and len(args):
+            for index, value in enumerate(args):
+                if index is 0:
+                    self.id = value
+                elif index is 1:
+                    self.width = value
+                elif index is 2:
+                    self.height = value
+                elif index is 3:
+                    self.x = value
+                elif index is 4:
+                    self.y = value
+                elif index >= 5:
+                    raise Exception("Too many arguments")
         else:
-            for key, value in kwargs.items():
-                if key in names:
-                    setattr(self, key, value)
+            for key in kwargs:
+                if key == "id":
+                    self.id = kwargs["id"]
+                elif key == "width":
+                    self.width = kwargs["width"]
+                elif key == "height":
+                    self.height = kwargs["height"]
+                elif key == "x":
+                    self.x = kwargs["x"]
+                elif key == "y":
+                    self.y = kwargs["y"]
 
     def to_dictionary(self):
-        """Returns the dict representation of a Rectangle"""
-
-        dictionary = {}
-        dictionary['id'] = self.id
-        dictionary['width'] = self.__width
-        dictionary['height'] = self.__height
-        dictionary['x'] = self.__x
-        dictionary['y'] = self.__y
-        return dictionary
+        """ returns the dict representation of a rect """
+        temp = {}
+        temp['id'] = self.id
+        temp['width'] = self.width
+        temp['height'] = self.height
+        temp['x'] = self.x
+        temp['y'] = self.y
+        return temp
