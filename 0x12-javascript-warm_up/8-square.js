@@ -13,3 +13,4 @@ if (isNaN(number)) {
   for (x = 0; x < number; x++) {
     console.log(square.repeat(number));
   }
+}
