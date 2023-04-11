@@ -1,3 +1,12 @@
 #!/usr/bin/nodejs
-const args = process.argv;
-console.log(args);
+const ArgCount = [];
+let ind;
+process.argv.forEach((val, index) => {
+  ArgCount[index] = `${val}`;
+  ind = `${index}`;
+});
+if (ind < 2) {
+  console.log('No argument');
+} else {
+  console.log(ArgCount[2]);
+}
