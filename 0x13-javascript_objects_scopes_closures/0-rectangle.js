@@ -3,4 +3,5 @@ class Rectangle {
 }
 
 const r1 = new Rectangle();
-r1.constructor;
+const x = r1.constructor;
+console.log(x);
