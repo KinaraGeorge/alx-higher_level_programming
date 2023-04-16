@@ -1,8 +1,9 @@
 Traceback (most recent call last):
   File "/home/kinara/alx/trials/./connectDB.py", line 6, in <module>
-    db = MySQLdb.connect(host="localhost", port=3306, user="your_username", passwd="your_password", db="data")
+    db = MySQLdb.connect(host="localhost", port=3306, user="root", db="data")
   File "/usr/local/lib/python3.10/dist-packages/MySQLdb/__init__.py", line 123, in Connect
     return Connection(*args, **kwargs)
   File "/usr/local/lib/python3.10/dist-packages/MySQLdb/connections.py", line 185, in __init__
     super().__init__(*args, **kwargs2)
-MySQLdb.OperationalError: (1045, "Access denied for user 'your_username'@'localhost' (using password: YES)")
+MySQLdb.OperationalError: (1698, "Access denied for user 'root'@'localhost'")
+
