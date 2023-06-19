@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 def add(c):
-    c += 1
+    c.append(4)
 
 
-a = 4
+a = [1, 2, 3]
 
 add(a)
 
