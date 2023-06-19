@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-def add(c):
-    c.append(4)
+def add(x, y):
+    x = y
 
 
 a = [1, 2, 3]
+b = [4, 6, 7]
 
-add(a)
+add(a, b)
 
-print(a)
+print(b)
