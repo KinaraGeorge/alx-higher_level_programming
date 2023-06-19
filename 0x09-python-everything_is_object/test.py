@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 
-def copy_list(l):
-    return l.copy()
+a = (1)
+print(type(a))
 
-
-list = ["book", 2, 4, True]
-print(copy_list(list))
